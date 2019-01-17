@@ -5,6 +5,8 @@ from collections import defaultdict
 import re
 import pickle
 import sys
+import time
+from tqdm import tqdm
 
 
 class Segmentor():
@@ -349,26 +351,26 @@ class Segmentor():
         :return None:
         """
         answers = []
-
+        start = time.clock()
         # 根据method选择方法进行分词
         with open(file_path, 'r', encoding='GBK') as f:
             if method == 'FMM':
-                for line in f:
+                for line in tqdm(f):
                     line_seg = ' '.join(self._forward_max_match(line))
                     answers.append(line_seg)
             elif method == 'BMM':
-                for line in f:
+                for line in tqdm(f):
                     line_seg = ' '.join(self._backward_max_match(line))
                     answers.append(line_seg + '\n')
             elif method == 'MP':
-                for line in f:
+                for line in tqdm(f):
                     line_seg = ' '.join(self._run_max_prob(line))
                     answers.append(line_seg)
-
+        elapsed = (time.clock() - start)
         # 分词结果写入文件
         with open('./answers.txt', 'w', encoding='GBK') as f:
             for answer in answers:
                 f.write(answer)
 
-        print("file seg complete, saved in ./answers.txt")
+        print("file seg complete in %f s, saved in ./answers.txt" % elapsed)
         return
