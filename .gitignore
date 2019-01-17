@@ -102,3 +102,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# answer
+answers.txt
+
+# dic save files
+dic_bi.pkl
+dic_uni.pkl
