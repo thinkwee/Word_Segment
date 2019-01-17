@@ -2,13 +2,14 @@
 - 中分分词工具
 - 实现前向、后向、Ngram最大概率切分
 - 可以自行扩充百度、头条、搜狗或者细分领域切分语料，存为training_more.utf8，格式同默认使用的微软语料msr_training.utf8
-- 为了准确率做了分句，速度较慢，i7-8700环境下速度约77000字每秒
+- 为了准确率做了分句，速度较慢，i7-8700环境下，分词速度约77000字每秒
 - 微软测试集F值0.944，北大测试集F值0.883
 - 附评测脚本，详见http://sighan.cs.uchicago.edu/bakeoff2005/
 - python main.py 
   - --more=0，默认使用微软训练集，可使用training_more.utf8自定义训练集
   - --save=1，默认训练一次，保存ngram词典
-  - --metho='MP'，默认使用最大概率，可选'FMM'以及'BMM'
+  - --method='MP'，默认使用最大概率，可选'FMM'以及'BMM'
   - --path='./test.txt'，带分词文件路径
 - 训练完之后可注释掉main.py中的segmentor.build_dic(save)，直接分词
 - 分词作业，可以实用，请勿抄袭
+- 依赖包：collections,tqdm,pickle
